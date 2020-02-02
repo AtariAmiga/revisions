@@ -1,13 +1,14 @@
 from random import randrange
 
+# Je construis la liste des questions
 liste_questions = []
 
-# Je construis la liste des questions
 for i in range(1, 11):
     for j in range(i, 11):
         question = (i, j)
         liste_questions.append(question)
 
+# On interroge
 while True:
     mauvaises_reponses = []
     while len(liste_questions) > 0:
