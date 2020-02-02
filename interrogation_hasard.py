@@ -1,9 +1,14 @@
 from random import randrange
 
+def operation(i, j): return i*j
+operateur = 'x'
+de = 1
+a = 10
+
 # Je construis la liste des questions
 liste_questions = []
 
-for i in range(1, 11):
+for i in range(de, a + 1):
     for j in range(i, 11):
         question = (i, j)
         liste_questions.append(question)
@@ -18,7 +23,7 @@ while True:
         j = question_au_hasard[1]
 
         while True:
-            print(i, 'x', j, '= ?')
+            print(i, operateur, j, '= ?')
             while True:
                 try:
                     r = int(input())
@@ -26,7 +31,7 @@ while True:
                 except ValueError:
                     pass
 
-            if r == i * j:
+            if r == operation(i, j):
                 print( "Bravo !")
                 break
             else:
