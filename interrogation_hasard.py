@@ -4,7 +4,7 @@ liste_questions = []
 
 # Je construis la liste des questions
 for i in range(1, 11):
-    for j in range(1, 11):
+    for j in range(i, 11):
         question = (i, j)
         liste_questions.append(question)
 
