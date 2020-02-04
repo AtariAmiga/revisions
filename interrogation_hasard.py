@@ -1,5 +1,7 @@
+import time
 from random import randrange
 
+temps_max_alloue_en_s = 15
 def operation(i, j): return i*j
 operateur = 'x'
 de = 1
@@ -15,7 +17,7 @@ for i in range(de, a + 1):
 
 # On interroge
 while True:
-    mauvaises_reponses = []
+    questions_a_poser_a_nouveau = []
     while len(liste_questions) > 0:
         n = randrange(len(liste_questions))
         question_au_hasard = liste_questions.pop(n)
@@ -24,6 +26,7 @@ while True:
 
         while True:
             print(i, operateur, j, '= ?')
+            instant_de_depart = time.time()
             while True:
                 try:
                     r = int(input())
@@ -31,15 +34,19 @@ while True:
                 except ValueError:
                     pass
 
+            temps_de_reponse_en_s = time.time() - instant_de_depart
             if r == operation(i, j):
-                print( "Bravo !")
+                print( "Bravo ! (reste", len(liste_questions), "questions)")
+                if temps_de_reponse_en_s > temps_max_alloue_en_s:
+                    print("Cependant tu as mis plus de " + str(temps_max_alloue_en_s) + "s pour répondre: je te poserai cette question à nouveau")
+                    questions_a_poser_a_nouveau.append(question_au_hasard)
                 break
             else:
                 print( "Tu t'es trompé, recommence" )
-                mauvaises_reponses.append(question_au_hasard)
+                questions_a_poser_a_nouveau.append(question_au_hasard)
 
-    liste_questions = mauvaises_reponses
-    if len(mauvaises_reponses) == 0:
+    liste_questions = questions_a_poser_a_nouveau
+    if len(questions_a_poser_a_nouveau) == 0:
         print( "Bravo, tu as tout bien révisé !")
         break
     else:
