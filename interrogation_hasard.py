@@ -2,16 +2,11 @@ import time
 from random import randrange
 
 temps_max_alloue_en_s = 15
-def operation(i, j): return i*j
-operateur = 'x'
-de = 1
-a = 10
-
 # Je construis la liste des questions
 liste_questions = []
 
-for i in range(de, a + 1):
-    for j in range(i, 11):
+for i in range(1, 10 + 1):
+    for j in range(i, 10 + 1):
         question = (i, j)
         liste_questions.append(question)
 
@@ -25,7 +20,7 @@ while True:
         j = question_au_hasard[1]
 
         while True:
-            print(i, operateur, j, '= ?')
+            print(i, 'x', j, '= ?')
             instant_de_depart = time.time()
             while True:
                 try:
@@ -35,7 +30,7 @@ while True:
                     pass
 
             temps_de_reponse_en_s = time.time() - instant_de_depart
-            if r == operation(i, j):
+            if r == i * j:
                 print( "Bravo ! (reste", len(liste_questions), "questions)")
                 if temps_de_reponse_en_s > temps_max_alloue_en_s:
                     print("Cependant tu as mis plus de " + str(temps_max_alloue_en_s) + "s pour répondre: je te poserai cette question à nouveau")
